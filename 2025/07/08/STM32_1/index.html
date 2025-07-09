@@ -225,7 +225,7 @@
             
                 <span class="meta-info-item post-update-date">
                     <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                    <span class="datetime" data-updated="Tue Jul 08 2025 20:09:07 GMT+0800">2025年07月08日 20:09:07</span>
+                    <span class="datetime" data-updated="Wed Jul 09 2025 17:23:09 GMT+0800">2025年07月09日 17:23:09</span>
                 </span>
             
         
@@ -261,12 +261,12 @@
         
         
             <span class="meta-info-item post-wordcount">
-                <i class="icon fas fa-file-word"></i>&nbsp;<span>710 字</span>
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>1.1k 字</span>
             </span>
         
         
             <span class="meta-info-item post-min2read">
-                <i class="icon fas fa-clock"></i>&nbsp;<span>2 分钟</span>
+                <i class="icon fas fa-clock"></i>&nbsp;<span>3 分钟</span>
             </span>
         
         
@@ -291,14 +291,30 @@
 <li>32： 代表32位的处理器架构。</li>
 </ul>
 <h2 id="通用资源"><a href="#通用资源" class="headerlink" title="通用资源"></a>通用资源</h2><h3 id="GPIO"><a href="#GPIO" class="headerlink" title="GPIO"></a>GPIO</h3><p><code>GPIO:General Purpose Input/Output 通用输入输出</code><br>GPIO是通用输入输出端口的简称，简单来说就是STM32可控制的引脚，STM32芯片的GPIO引脚与外部设备连接起来，从而实现与外部通讯、控制以及数据采集的功能。<br><strong>主要功能包括：</strong><br><code>输入（采集）</code>：GPIO 可以配置为输入模式，用于采集外部器件的信息。例如，连接传感器、开关或按钮等外部设备，通过 GPIO 读取这些设备的状态。<br><code>输出（控制）</code>：GPIO 也可以配置为输出模式，用于控制外部器件的工作。例如，连接LED、继电器、驱动器等外部设备，通过 GPIO 输出电平信号来控制这些设备的工作状态。</p>
-<h4 id="GPIO的八种模式分析"><a href="#GPIO的八种模式分析" class="headerlink" title="GPIO的八种模式分析"></a>GPIO的八种模式分析</h4><p><img   src="/STM32_1/GPIO_8.png"  alt="GPIO_8"><br>输入浮空（Floating Input）：<br>特点： 输入用，完全浮空，状态不定。<br>应用： 适用于需要读取外部信号的场景，但外部信号状态不确定。</p>
-<p>输入上拉（Input Pull-Up）：<br>特点： 输入用，使用内部上拉电阻，初始状态是高电平。<br>应用： 适用于外部信号默认为高电平的情况，如按钮按下时会拉低信号。</p>
-<p>输入下拉（Input Pull-Down）：<br>特点： 输入用，使用内部下拉电阻，初始状态是低电平。<br>应用： 适用于外部信号默认为低电平的情况，如按钮按下时会拉高信号。</p>
-<p>模拟功能（Analog Mode）：<br>特点： 用于连接模拟外设，如ADC（模数转换器）、DAC（数模转换器）等。<br>应用： 适用于需要进行模拟信号处理的场景。</p>
-<p>开漏输出（Open-Drain Output）：<br>特点： 用于实现开漏输出，常用于构建总线，如I2C。<br>应用： 适用于需要多个输出端口共享同一信号线的场景，例如I2C的SDA、SCL线。</p>
-<p>推挽输出（Push-Pull Output）：<br>特点： 驱动能力强，支持通用输出，可提供较大电流。<br>应用： 适用于需要输出到外部设备，需要较大驱动能力的场景。</p>
-<p>开漏式复用功能（Open-Drain Alternate Function）：<br>特点： 用于实现开漏输出，并复用了片上外设功能。<br>应用： 适用于需要实现外设功能，同时共享信号线的场景，例如硬件I2C的SDA、SCL线。</p>
-<p>推挽式复用功能（Push-Pull Alternate Function）：<br>特点： 用于实现推挽输出，并复用了片上外设功能。<br>应用： 适用于需要实现外设功能，同时需要提供较大驱动能力的场景，例如SPI的SCK、MISO、MOSI线。</p>
+<h4 id="GPIO的八种模式分析"><a href="#GPIO的八种模式分析" class="headerlink" title="GPIO的八种模式分析"></a>GPIO的八种模式分析</h4><p><img   src="/images/STM32_1/GPIO_8.png"  alt="GPIO_8"><br><code>输入浮空（Floating Input）：</code><br>特点： 输入用，完全浮空，状态不定。<br>应用： 适用于需要读取外部信号的场景，但外部信号状态不确定。</p>
+<p><code>输入上拉（Input Pull-Up）：</code><br>特点： 输入用，使用内部上拉电阻，初始状态是高电平。<br>应用： 适用于外部信号默认为高电平的情况，如按钮按下时会拉低信号。</p>
+<p><code>输入下拉（Input Pull-Down）：</code><br>特点： 输入用，使用内部下拉电阻，初始状态是低电平。<br>应用： 适用于外部信号默认为低电平的情况，如按钮按下时会拉高信号。</p>
+<p><code>模拟功能（Analog Mode）：</code><br>特点： 用于连接模拟外设，如ADC（模数转换器）、DAC（数模转换器）等。<br>应用： 适用于需要进行模拟信号处理的场景。</p>
+<p><code>开漏输出（Open-Drain Output）：</code><br>特点： 用于实现开漏输出，常用于构建总线，如I2C。<br>应用： 适用于需要多个输出端口共享同一信号线的场景，例如I2C的SDA、SCL线。</p>
+<p><code>推挽输出（Push-Pull Output）：</code><br>特点： 驱动能力强，支持通用输出，可提供较大电流。<br>应用： 适用于需要输出到外部设备，需要较大驱动能力的场景。</p>
+<p><code>开漏式复用功能（Open-Drain Alternate Function）：</code><br>特点： 用于实现开漏输出，并复用了片上外设功能。<br>应用： 适用于需要实现外设功能，同时共享信号线的场景，例如硬件I2C的SDA、SCL线。</p>
+<p><code>推挽式复用功能（Push-Pull Alternate Function）：</code><br>特点： 用于实现推挽输出，并复用了片上外设功能。<br>应用： 适用于需要实现外设功能，同时需要提供较大驱动能力的场景，例如SPI的SCK、MISO、MOSI线。</p>
+<h2 id="STM32F407ZGT6实现小灯闪烁原理解析"><a href="#STM32F407ZGT6实现小灯闪烁原理解析" class="headerlink" title="STM32F407ZGT6实现小灯闪烁原理解析"></a>STM32F407ZGT6实现小灯闪烁原理解析</h2><h3 id="项目结构解析"><a href="#项目结构解析" class="headerlink" title="项目结构解析"></a>项目结构解析</h3><p><img   src="/images/STM32_1/Driver_File.png"  alt="Driver_file"></p>
+<ol>
+<li><code>Drivers 文件夹</code>: 用于存放各种底层驱动代码，包括芯片厂家提供的驱动代码、ARM 提供的驱动代码、以及我们自己编写的底层驱动代码等三部分</li>
+</ol>
+<ul>
+<li><code>BSP 文件夹</code>: 存放我们自己编写的各种底层驱动代码(（原HARDWARE文件夹下的代码）)，如LED、KEY、BEEP、DHT11、DS18b20、ESP8266等。</li>
+<li><code>CMSIS 文件夹</code>: 包含 ARM 提供基于 CMSIS 标准的底层代码，简单的说，包含我们新建工程需要的启动文件（.s 文件）和相关头文件（ARM 提供和 ST 独有两部分）等。</li>
+<li><code>SYSTEM 文件夹</code>: 存放我们自己编写的系统、延时、串口相关的代码，包括sys、delay和usart三个子文件夹，分别提供时钟配置，延时和串口驱动等关键代码,方便项目使用。</li>
+<li><code>STM32F4xx_HAL_Driver 文件夹</code>: ST提供的F4 HAL库驱动代码</li>
+</ul>
+<ol start="2">
+<li><code>Middlewares 文件夹</code>: 用于存放各种中间层&#x2F;组件&#x2F;Lib 代码，包括我们自己写的或者第三方提供的，如 USMART、MALLOC、TEXT、PICTURE、FATFS、OS、GUI、USB 等</li>
+<li><code>Output 文件夹</code>: 用于存放各种编译中间文件及输出文件(原OBJ文件夹)</li>
+<li><code>Project 文件夹</code>: 用于存放工程文件,该文件夹下面只包含一个 MDK-ARM 的文件夹，用于存放 MDK 版本工程文件</li>
+<li><code>User 文件夹</code>: 用于存放用户编写的代码（如果有分散加载，我们也把分散加载文件放这个文件夹下）。</li>
+</ol>
 
                     
                 </div>
@@ -472,7 +488,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="nav-text">命名规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E8%B5%84%E6%BA%90"><span class="nav-text">通用资源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GPIO"><span class="nav-text">GPIO</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#GPIO%E7%9A%84%E5%85%AB%E7%A7%8D%E6%A8%A1%E5%BC%8F%E5%88%86%E6%9E%90"><span class="nav-text">GPIO的八种模式分析</span></a></li></ol></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="nav-text">命名规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E8%B5%84%E6%BA%90"><span class="nav-text">通用资源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GPIO"><span class="nav-text">GPIO</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#GPIO%E7%9A%84%E5%85%AB%E7%A7%8D%E6%A8%A1%E5%BC%8F%E5%88%86%E6%9E%90"><span class="nav-text">GPIO的八种模式分析</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#STM32F407ZGT6%E5%AE%9E%E7%8E%B0%E5%B0%8F%E7%81%AF%E9%97%AA%E7%83%81%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90"><span class="nav-text">STM32F407ZGT6实现小灯闪烁原理解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E8%A7%A3%E6%9E%90"><span class="nav-text">项目结构解析</span></a></li></ol></li></ol>
     </div>
 </div>
 
@@ -518,7 +534,7 @@
             
                 <span class="count-item border-box word">
                     <span class="item-type border-box">总字数</span>
-                    <span class="item-value border-box word">2.8k</span>
+                    <span class="item-value border-box word">3.2k</span>
                 </span>
             
 
@@ -665,7 +681,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="nav-text">命名规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E8%B5%84%E6%BA%90"><span class="nav-text">通用资源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GPIO"><span class="nav-text">GPIO</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#GPIO%E7%9A%84%E5%85%AB%E7%A7%8D%E6%A8%A1%E5%BC%8F%E5%88%86%E6%9E%90"><span class="nav-text">GPIO的八种模式分析</span></a></li></ol></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="nav-text">命名规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E8%B5%84%E6%BA%90"><span class="nav-text">通用资源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GPIO"><span class="nav-text">GPIO</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#GPIO%E7%9A%84%E5%85%AB%E7%A7%8D%E6%A8%A1%E5%BC%8F%E5%88%86%E6%9E%90"><span class="nav-text">GPIO的八种模式分析</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#STM32F407ZGT6%E5%AE%9E%E7%8E%B0%E5%B0%8F%E7%81%AF%E9%97%AA%E7%83%81%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90"><span class="nav-text">STM32F407ZGT6实现小灯闪烁原理解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E8%A7%A3%E6%9E%90"><span class="nav-text">项目结构解析</span></a></li></ol></li></ol>
     </div>
 </div>
 
