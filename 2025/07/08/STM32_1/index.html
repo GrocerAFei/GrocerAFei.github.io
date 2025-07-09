@@ -225,7 +225,7 @@
             
                 <span class="meta-info-item post-update-date">
                     <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                    <span class="datetime" data-updated="Wed Jul 09 2025 22:21:03 GMT+0800">2025年07月09日 22:21:03</span>
+                    <span class="datetime" data-updated="Wed Jul 09 2025 22:23:57 GMT+0800">2025年07月09日 22:23:57</span>
                 </span>
             
         
@@ -291,7 +291,7 @@
 <li>32： 代表32位的处理器架构。</li>
 </ul>
 <h2 id="通用资源"><a href="#通用资源" class="headerlink" title="通用资源"></a>通用资源</h2><h3 id="GPIO"><a href="#GPIO" class="headerlink" title="GPIO"></a>GPIO</h3><p><code>GPIO:General Purpose Input/Output 通用输入输出</code><br>GPIO是通用输入输出端口的简称，简单来说就是STM32可控制的引脚，STM32芯片的GPIO引脚与外部设备连接起来，从而实现与外部通讯、控制以及数据采集的功能。<br><strong>主要功能包括：</strong><br><code>输入（采集）</code>：GPIO 可以配置为输入模式，用于采集外部器件的信息。例如，连接传感器、开关或按钮等外部设备，通过 GPIO 读取这些设备的状态。<br><code>输出（控制）</code>：GPIO 也可以配置为输出模式，用于控制外部器件的工作。例如，连接LED、继电器、驱动器等外部设备，通过 GPIO 输出电平信号来控制这些设备的工作状态。</p>
-<h4 id="GPIO的八种模式分析"><a href="#GPIO的八种模式分析" class="headerlink" title="GPIO的八种模式分析"></a>GPIO的八种模式分析</h4><p><img   src="/images/STM32_1/GPIO_8.png"  alt="GPIO_8"><br><code>输入浮空（Floating Input）：</code><br>特点： 输入用，完全浮空，状态不定。<br>应用： 适用于需要读取外部信号的场景，但外部信号状态不确定。</p>
+<h4 id="GPIO的八种模式分析"><a href="#GPIO的八种模式分析" class="headerlink" title="GPIO的八种模式分析"></a>GPIO的八种模式分析</h4><p><img   src="/GPIO_8.png"  alt="GPIO_8"><br><code>输入浮空（Floating Input）：</code><br>特点： 输入用，完全浮空，状态不定。<br>应用： 适用于需要读取外部信号的场景，但外部信号状态不确定。</p>
 <p><code>输入上拉（Input Pull-Up）：</code><br>特点： 输入用，使用内部上拉电阻，初始状态是高电平。<br>应用： 适用于外部信号默认为高电平的情况，如按钮按下时会拉低信号。</p>
 <p><code>输入下拉（Input Pull-Down）：</code><br>特点： 输入用，使用内部下拉电阻，初始状态是低电平。<br>应用： 适用于外部信号默认为低电平的情况，如按钮按下时会拉高信号。</p>
 <p><code>模拟功能（Analog Mode）：</code><br>特点： 用于连接模拟外设，如ADC（模数转换器）、DAC（数模转换器）等。<br>应用： 适用于需要进行模拟信号处理的场景。</p>
@@ -300,19 +300,19 @@
 <p><code>开漏式复用功能（Open-Drain Alternate Function）：</code><br>特点： 用于实现开漏输出，并复用了片上外设功能。<br>应用： 适用于需要实现外设功能，同时共享信号线的场景，例如硬件I2C的SDA、SCL线。</p>
 <p><code>推挽式复用功能（Push-Pull Alternate Function）：</code><br>特点： 用于实现推挽输出，并复用了片上外设功能。<br>应用： 适用于需要实现外设功能，同时需要提供较大驱动能力的场景，例如SPI的SCK、MISO、MOSI线。</p>
 <h2 id="STM32F407实现小灯闪烁原理解析"><a href="#STM32F407实现小灯闪烁原理解析" class="headerlink" title="STM32F407实现小灯闪烁原理解析"></a>STM32F407实现小灯闪烁原理解析</h2><h3 id="项目结构解析"><a href="#项目结构解析" class="headerlink" title="项目结构解析"></a>项目结构解析</h3><ol>
-<li><code>Drivers 文件夹</code>: 用于存放各种底层驱动代码，包括芯片厂家提供的驱动代码、ARM 提供的驱动代码、以及我们自己编写的底层驱动代码等三部分<br><img   src="/../_posts/STM32_1/Driver_File.png"  alt="Driver_File"></li>
+<li><code>Drivers 文件夹</code>: 用于存放各种底层驱动代码，包括芯片厂家提供的驱动代码、ARM 提供的驱动代码、以及我们自己编写的底层驱动代码等三部分<br><img   src="/Driver_File.png"  alt="Driver_File"></li>
 </ol>
 <ul>
 <li><strong>BSP 文件夹</strong>: 存放我们自己编写的各种底层驱动代码(（原HARDWARE文件夹下的代码）)，如LED、KEY、BEEP、DHT11、DS18b20、ESP8266等。</li>
 <li><strong>CMSIS 文件夹</strong>: 包含 ARM 提供基于 CMSIS 标准的底层代码，简单的说，包含我们新建工程需要的启动文件（.s 文件）和相关头文件（ARM 提供和 ST 独有两部分）等。</li>
 <li><strong>SYSTEM 文件夹</strong>: 存放我们自己编写的系统、延时、串口相关的代码，包括sys、delay和usart三个子文件夹，分别提供时钟配置，延时和串口驱动等关键代码,方便项目使用。</li>
-<li><strong>STM32F4xx_HAL_Driver 文件夹</strong>: ST提供的F4 HAL库驱动代码。Inc 包含 HAL 库驱动的各种头文件。Src 包含 HAL 库驱动的各种源码文件。<br><img   src="/images/STM32_1/HAL_File.png"  alt="HAL_File"></li>
+<li><strong>STM32F4xx_HAL_Driver 文件夹</strong>: ST提供的F4 HAL库驱动代码。Inc 包含 HAL 库驱动的各种头文件。Src 包含 HAL 库驱动的各种源码文件。<br><img   src="/HAL_File.png"  alt="HAL_File"></li>
 </ul>
 <ol start="2">
 <li><code>Middlewares 文件夹</code>: 用于存放各种中间层&#x2F;组件&#x2F;Lib 代码，包括我们自己写的或者第三方提供的，如 USMART、MALLOC、TEXT、PICTURE、FATFS、OS、GUI、USB 等</li>
 <li><code>Output 文件夹</code>: 用于存放各种编译中间文件及输出文件(原OBJ文件夹)</li>
-<li><code>Project 文件夹</code>: 用于存放工程文件,该文件夹下面只包含一个 MDK-ARM 的文件夹，用于存放 MDK 版本工程文件<br><img   src="/images/STM32_1/MDK_File.png"  alt="MDK_File"><br>其中：atk_f407.uvprojx，就是 MDK5 的工程文件，DebugConfig 用于存放仿真调试配置信息，由 MDK 自动生成，我们无视他即可。<br>注意：.uvprojx 的命名方式我们统一使用 atk_xxx 的命名方式，如 F103，我们就命名为：atk_f103.uvprojx（注意，是在使用 MDK 新建工程的时候，确定命名的）。</li>
-<li><code>User 文件夹</code>: 用于存放用户编写的代码（如果有分散加载，我们也把分散加载文件放这个文件夹下）。<br><img   src="/images/STM32_1/User_File.png"  alt="User_File"><br>其中：<strong>main.c</strong>: 主要包含了 main 函数。<br><strong>APP 文件夹</strong>: 用于存放自己编写的应用代码（绝大部分基础例程代码并不多，只用 main.c实现就够了，并不用 APP 文件夹），因为视频播放代码比较多，所以放在 APP 文件夹里面（videoplayer.c）。 该文件夹是可以删除的，并不一定要保留，只有需要的时候，才留下。<br><strong>SCRIPT 文件夹</strong>: 用于存放我们编写分散加载文件，仅 F750&#x2F;H750 等开发板需要这个文件夹，其他开发板用不到分散加载的，都可以删了这个文件夹。</li>
+<li><code>Project 文件夹</code>: 用于存放工程文件,该文件夹下面只包含一个 MDK-ARM 的文件夹，用于存放 MDK 版本工程文件<br><img   src="/MDK_File.png"  alt="MDK_File"><br>其中：atk_f407.uvprojx，就是 MDK5 的工程文件，DebugConfig 用于存放仿真调试配置信息，由 MDK 自动生成，我们无视他即可。<br>注意：.uvprojx 的命名方式我们统一使用 atk_xxx 的命名方式，如 F103，我们就命名为：atk_f103.uvprojx（注意，是在使用 MDK 新建工程的时候，确定命名的）。</li>
+<li><code>User 文件夹</code>: 用于存放用户编写的代码（如果有分散加载，我们也把分散加载文件放这个文件夹下）。<br><img   src="/User_File.png"  alt="User_File"><br>其中：<strong>main.c</strong>: 主要包含了 main 函数。<br><strong>APP 文件夹</strong>: 用于存放自己编写的应用代码（绝大部分基础例程代码并不多，只用 main.c实现就够了，并不用 APP 文件夹），因为视频播放代码比较多，所以放在 APP 文件夹里面（videoplayer.c）。 该文件夹是可以删除的，并不一定要保留，只有需要的时候，才留下。<br><strong>SCRIPT 文件夹</strong>: 用于存放我们编写分散加载文件，仅 F750&#x2F;H750 等开发板需要这个文件夹，其他开发板用不到分散加载的，都可以删了这个文件夹。</li>
 </ol>
 <h3 id="代码解析"><a href="#代码解析" class="headerlink" title="代码解析"></a>代码解析</h3><p>main.c</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    HAL_Init();                                 <span class="comment">/* 初始化HAL库 */</span></span><br><span class="line">    sys_stm32_clock_init(<span class="number">336</span>, <span class="number">8</span>, <span class="number">2</span>, <span class="number">7</span>);         <span class="comment">/* 设置时钟,168Mhz */</span></span><br><span class="line">    delay_init(<span class="number">168</span>);                            <span class="comment">/* 延时初始化 */</span></span><br><span class="line">    led_init();                                 <span class="comment">/* 初始化LED */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        LED0(<span class="number">0</span>);                                <span class="comment">/* LED0 亮 */</span></span><br><span class="line">        LED1(<span class="number">1</span>);                                <span class="comment">/* LED1 灭 */</span></span><br><span class="line">        delay_ms(<span class="number">500</span>);</span><br><span class="line">        LED0(<span class="number">1</span>);                                <span class="comment">/* LED0 灭 */</span></span><br><span class="line">        LED1(<span class="number">0</span>);                                <span class="comment">/* LED1 亮 */</span></span><br><span class="line">        delay_ms(<span class="number">500</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
